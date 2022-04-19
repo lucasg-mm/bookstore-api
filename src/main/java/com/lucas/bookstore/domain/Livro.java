@@ -1,14 +1,20 @@
 package com.lucas.bookstore.domain;
 
-import java.util.List;
+import javax.persistence.*;
 
+@Entity
 public class Livro {
+    private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String titulo;
     private String nomeAutor;
     private String texto;
 
+    @ManyToOne
+    @JoinColumn(name="categoria_id")
     private Categoria categoria;
 
     public Livro() {
