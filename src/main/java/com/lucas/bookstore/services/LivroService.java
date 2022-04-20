@@ -1,5 +1,6 @@
 package com.lucas.bookstore.services;
 
+import com.lucas.bookstore.domain.Categoria;
 import com.lucas.bookstore.domain.Livro;
 import com.lucas.bookstore.repositories.LivroRepository;
 import com.lucas.bookstore.services.exceptions.ObjectNotFoundException;
@@ -37,5 +38,12 @@ public class LivroService {
         newObj.setTitulo(obj.getTitulo());
         newObj.setNomeAutor(obj.getNomeAutor());
         newObj.setTexto(obj.getTexto());
+    }
+
+    public Livro create(Integer id_cat, Livro obj) {
+        obj.setId(null);
+        Categoria cat = categoriaService.findById(id_cat);
+        obj.setCategoria(cat);
+        return repository.save(obj);
     }
 }
