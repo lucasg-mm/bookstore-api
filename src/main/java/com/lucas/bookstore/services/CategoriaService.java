@@ -3,6 +3,7 @@ package com.lucas.bookstore.services;
 import com.lucas.bookstore.domain.Categoria;
 import com.lucas.bookstore.dtos.CategoriaDTO;
 import com.lucas.bookstore.repositories.CategoriaRepository;
+import com.lucas.bookstore.services.exceptions.DataIntegrityViolationException;
 import com.lucas.bookstore.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +40,10 @@ public class CategoriaService {
 
     public void delete(Integer id) {
         findById(id);
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Categoria não pode ser deletada. Ela possui livros associados.");
+        }
     }
 }
