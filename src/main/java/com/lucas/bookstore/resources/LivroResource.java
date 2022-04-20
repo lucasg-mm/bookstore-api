@@ -3,6 +3,7 @@ package com.lucas.bookstore.resources;
 import com.lucas.bookstore.domain.Livro;
 import com.lucas.bookstore.dtos.LivroDTO;
 import com.lucas.bookstore.services.LivroService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,5 +55,11 @@ public class LivroResource {
                 .buildAndExpand(newObj.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
     }
 }
