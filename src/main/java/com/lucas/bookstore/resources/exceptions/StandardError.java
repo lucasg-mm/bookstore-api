@@ -5,6 +5,9 @@ public class StandardError {
     private Integer status;
     private String error;
 
+    public StandardError() {
+    }
+
     public StandardError(Long timestamp, Integer status, String error) {
         this.timestamp = timestamp;
         this.status = status;
